@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Marketplace de Productos para Mascotas — Arquitectura en Capas",
+    "quality_profile": "showcase",
+    "output": "marketplace-arquitectura.html",
+    "views": [
+      {
+        "id": "flujo-compra",
+        "label": "Flujo de compra del cliente",
+        "focus": ["cliente", "webapp", "api-rest", "catalogo", "carrito", "pedidos", "db"],
+        "note": "Camino principal desde la búsqueda de productos hasta la generación del pedido."
+      },
+      {
+        "id": "gestion-seller",
+        "label": "Gestión de sellers y catálogo",
+        "focus": ["seller", "webapp", "api-rest", "sellers-mod", "catalogo", "db"],
+        "note": "Flujo de registro de productos por parte de los vendedores."
+      },
+      {
+        "id": "integraciones",
+        "label": "Integraciones externas",
+        "focus": ["pedidos", "catalogo", "pasarela-pago", "servicio-envio", "facturacion", "erp"],
+        "note": "Sistemas externos que procesan pagos, envíos, facturación y stock."
+      }
+    ]
+  },
+  "components": [
+    { "id": "cliente", "type": "external", "label": "Cliente", "sublabel": "Navegador web", "pos": [80, 50], "size": [130, 56] },
+    { "id": "seller", "type": "external", "label": "Seller", "sublabel": "Vendedor", "pos": [340, 50], "size": [130, 56] },
+    { "id": "admin", "type": "external", "label": "Administrador", "sublabel": "Gestión de plataforma", "pos": [600, 50], "size": [160, 56] },
+
+    { "id": "webapp", "type": "frontend", "label": "Aplicación Web", "sublabel": "Interfaz de usuario", "pos": [180, 200], "size": [160, 60] },
+    { "id": "api-rest", "type": "backend", "label": "API REST", "sublabel": "Node.js", "pos": [500, 200], "size": [140, 60], "tag": "HTTP/JSON" },
+
+    { "id": "usuarios", "type": "backend", "label": "Usuarios", "sublabel": "Auth y cuentas", "pos": [40, 390], "size": [120, 56] },
+    { "id": "sellers-mod", "type": "backend", "label": "Sellers", "sublabel": "Gestión vendedores", "pos": [200, 390], "size": [120, 56] },
+    { "id": "catalogo", "type": "backend", "label": "Catálogo", "sublabel": "Productos y búsqueda", "pos": [360, 390], "size": [130, 56] },
+    { "id": "carrito", "type": "backend", "label": "Carrito", "sublabel": "Carrito de compras", "pos": [530, 390], "size": [120, 56] },
+    { "id": "pedidos", "type": "backend", "label": "Pedidos", "sublabel": "Órdenes y tracking", "pos": [690, 390], "size": [130, 56] },
+
+    { "id": "db", "type": "database", "label": "PostgreSQL", "sublabel": "Base de datos relacional", "pos": [340, 560], "size": [180, 60], "tag": "RC07" },
+
+    { "id": "pasarela-pago", "type": "external", "label": "Pasarela de Pago", "sublabel": "Pagos seguros", "pos": [690, 560], "size": [150, 56] },
+    { "id": "erp", "type": "external", "label": "ERP", "sublabel": "Stock y productos", "pos": [40, 560], "size": [130, 56] },
+    { "id": "facturacion", "type": "external", "label": "Facturación", "sublabel": "Comprobantes", "pos": [690, 700], "size": [150, 56] },
+    { "id": "servicio-envio", "type": "external", "label": "Servicio de Envío", "sublabel": "Logística", "pos": [40, 700], "size": [150, 56] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Capa de Presentación", "wraps": ["webapp", "api-rest"] },
+    { "kind": "region", "label": "Capa de Lógica de Negocio", "wraps": ["usuarios", "sellers-mod", "catalogo", "carrito", "pedidos"] },
+    { "kind": "region", "label": "Capa de Datos", "wraps": ["db"] }
+  ],
+  "connections": [
+    { "id": "cliente-webapp", "from": "cliente", "to": "webapp", "label": "HTTPS", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "seller-webapp", "from": "seller", "to": "webapp", "label": "HTTPS", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "admin-api", "from": "admin", "to": "api-rest", "label": "HTTPS", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "webapp-api", "from": "webapp", "to": "api-rest", "label": "REST API" },
+    { "id": "api-usuarios", "from": "api-rest", "to": "usuarios", "fromSide": "bottom", "toSide": "top" },
+    { "id": "api-sellers", "from": "api-rest", "to": "sellers-mod", "fromSide": "bottom", "toSide": "top" },
+    { "id": "api-catalogo", "from": "api-rest", "to": "catalogo", "fromSide": "bottom", "toSide": "top" },
+    { "id": "api-carrito", "from": "api-rest", "to": "carrito", "fromSide": "bottom", "toSide": "top" },
+    { "id": "api-pedidos", "from": "api-rest", "to": "pedidos", "fromSide": "bottom", "toSide": "top" },
+    { "id": "negocio-db", "from": "catalogo", "to": "db", "label": "SQL", "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
+    { "id": "pedidos-pago", "from": "pedidos", "to": "pasarela-pago", "label": "procesar pago", "variant": "security", "fromSide": "bottom", "toSide": "top" },
+    { "id": "pedidos-envio", "from": "pedidos", "to": "servicio-envio", "label": "gestionar envío", "fromSide": "left", "toSide": "top" },
+    { "id": "pedidos-factura", "from": "pedidos", "to": "facturacion", "label": "comprobante", "fromSide": "right", "toSide": "top" },
+    { "id": "catalogo-erp", "from": "catalogo", "to": "erp", "label": "sync stock", "fromSide": "left", "toSide": "top" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Actores", "items": ["Cliente: busca, compra y consulta pedidos", "Seller: registra y gestiona productos", "Administrador: gestiona la plataforma"] },
+    { "dot": "emerald", "title": "Lógica de Negocio", "items": ["5 módulos: Usuarios, Sellers, Catálogo, Carrito, Pedidos", "Comunicación via API REST (RC03)", "Backend en Node.js (RC06)"] },
+    { "dot": "violet", "title": "Persistencia", "items": ["PostgreSQL como BD relacional (RC07)", "Todos los módulos acceden a la BD"] },
+    { "dot": "rose", "title": "Integraciones", "items": ["Pasarela de pago (DA04)", "Servicio de envío y tracking", "ERP para stock", "Facturación"] }
+  ]
+}
