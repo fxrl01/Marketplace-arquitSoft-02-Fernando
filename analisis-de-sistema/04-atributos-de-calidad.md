@@ -1,0 +1,12 @@
+# 04. Atributos de calidad
+
+Escenario considerado: durante una campaña comercial, el marketplace podría recibir una gran cantidad de usuarios consultando productos y realizando compras simultáneamente.
+
+| ID | Atributo de calidad | Escenario de calidad |
+|:---|:---|:---|
+| AC01 | Rendimiento | Las consultas de productos y operaciones del carrito deben responder rápidamente incluso cuando exista una alta cantidad de usuarios concurrentes. |
+| AC02 | Disponibilidad | El sistema debe permanecer disponible durante la campaña comercial y permitir que los usuarios realicen sus operaciones. |
+| AC03 | Escalabilidad | El sistema debe poder soportar un incremento de usuarios y solicitudes sin afectar significativamente su funcionamiento. |
+| AC04 | Seguridad | Los datos de los usuarios, cuentas y operaciones de compra deben estar protegidos frente a accesos no autorizados. |
+| AC05 | Mantenibilidad | El sistema debe estar organizado de manera que permita realizar cambios y correcciones sin afectar innecesariamente otras funcionalidades. |
+| AC06 | Usabilidad | El sistema debe ser fácil de usar para clientes y sellers, permitiendo completar las operaciones principales con pocos pasos. |

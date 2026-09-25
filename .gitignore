@@ -1,0 +1,13 @@
+# Archivos temporales
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+
+# Entornos de desarrollo
+.vscode/
+.idea/
+node_modules/
+
+# Archivos del sistema operativo
+*.swp
