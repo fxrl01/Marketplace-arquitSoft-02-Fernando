@@ -1,7 +1,7 @@
 # Marketplace de productos para mascotas
 
 ## Integrantes
-- [Nombre del estudiante]
+- Fernando Olivares Chuhui
 
 ## Descripción
 Marketplace académico de productos para mascotas, en el cual diferentes sellers pueden ofrecer sus productos y los clientes pueden realizar compras en línea.
