@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Kimi" version="24.0.0">
+  <diagram name="ArquitecturaMarketplace" id="marketplace-01">
+    <mxGraphModel dx="800" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="act" value="ACTORES&#xa;Cliente   |   Seller   |   Administrador" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="200" y="40" width="440" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pre" value="PRESENTACIÓN&#xa;Aplicación Web → API REST" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="180" width="440" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="neg" value="LÓGICA DE NEGOCIO&#xa;Usuarios | Sellers | Catálogo | Carrito | Pedidos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="320" width="440" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="dat" value="DATOS&#xa;Base de datos (PostgreSQL)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="480" width="440" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ext" value="SISTEMAS EXTERNOS&#xa;Pasarela de pago | ERP | Servicio de envío" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="620" width="440" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="act" target="pre">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="pre" target="neg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="neg" target="dat">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="integraciones" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeWidth=2;endArrow=block;endFill=1;fontSize=12;fontStyle=2;" edge="1" parent="1" source="dat" target="ext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
