@@ -19,9 +19,33 @@ Cada capa tiene sus propias responsabilidades y se comunica con la capa inmediat
 | Presentación | ¿Cómo interactúa el usuario? | Aplicación Web, API REST |
 | Lógica de negocio | ¿Qué hace el sistema? | Usuarios, Sellers, Catálogo, Carrito, Pedidos |
 | Datos | ¿Dónde se almacena la información? | Base de datos (PostgreSQL) |
-| Sistemas externos | ¿Con qué se integra? | Pasarela de pago, Servicio de envío, ERP |
+| Sistemas externos | ¿Con qué se integra? | Pasarela de pago, Servicio de envío, ERP, Facturación |
 
-## Diagrama de arquitectura
+## Responsabilidades por módulo
+
+| Módulo | Responsabilidad principal | Requisitos funcionales |
+|:---|:---|:---|
+| **Usuarios** | Gestionar autenticación, registro y administración de cuentas de usuarios del sistema. | RF13 |
+| **Sellers** | Gestionar el registro, actualización y desactivación de vendedores, y consultar sus ventas. | RF07, RF11 |
+| **Catálogo** | Gestionar productos, categorías, búsqueda, consulta de disponibilidad y stock. | RF01, RF02, RF03, RF12, RF15 |
+| **Carrito** | Gestionar los productos seleccionados por el cliente antes de generar el pedido. | RF04 |
+| **Pedidos** | Gestionar la generación de pedidos, procesamiento de pago, información de envío y comprobantes. | RF05, RF06, RF08, RF09, RF10, RF14 |
+
+## Dependencias entre capas
+
+```mermaid
+flowchart TD
+    P["Capa de Presentación"] -->|"consume"| N["Capa de Lógica de Negocio"]
+    N -->|"persiste en"| D["Capa de Datos"]
+    N -->|"se integra con"| E["Sistemas Externos"]
+
+    style P fill:#FFF3E0,stroke:#E65100,color:#000
+    style N fill:#E8F5E9,stroke:#2E7D32,color:#000
+    style D fill:#F3E5F5,stroke:#6A1B9A,color:#000
+    style E fill:#FFF8E1,stroke:#F9A825,color:#000
+```
+
+## Diagrama de arquitectura (Mermaid)
 
 ```mermaid
 flowchart TD
@@ -86,3 +110,9 @@ flowchart TD
     style EXTERNOS fill:#FFF8E1,stroke:#F9A825,stroke-width:2px,color:#000
 ```
 
+## Diagrama interactivo (Archify)
+
+Para una versión interactiva con zoom, búsqueda, trazado de relaciones y vistas guiadas, consultar:
+
+- **HTML explorable:** [marketplace-arquitectura.html](marketplace-arquitectura.html)
+- **Especificación JSON:** [marketplace-arquitectura.architecture.json](marketplace-arquitectura.architecture.json)
