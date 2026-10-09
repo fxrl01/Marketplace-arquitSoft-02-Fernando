@@ -11,3 +11,7 @@ node_modules/
 
 # Archivos del sistema operativo
 *.swp
+
+# Archivos locales
+.agents/
+skills-lock.json
